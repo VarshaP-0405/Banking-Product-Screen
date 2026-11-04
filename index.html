@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A unified view of your banking products, balances, and next steps."
+    />
+    <title>Products | Northstar</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family:
+          Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        color: #172a3a;
+        background: #f5f7f8;
+        font-synthesis: none;
+        text-rendering: optimizeLegibility;
+        --ink: #172a3a;
+        --muted: #74838e;
+        --line: #e7ecee;
+        --teal: #137e78;
+        --teal-dark: #0e625e;
+        --surface: #fff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+      }
+
+      button,
+      input {
+        font: inherit;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      .app {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 248px minmax(0, 1fr);
+      }
+
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        padding: 28px 18px 22px;
+        color: #d3e2e4;
+        background: #173a45;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 2px 10px 38px;
+        color: white;
+        font-size: 17px;
+        font-weight: 720;
+        letter-spacing: -0.03em;
+      }
+
+      .brand-mark {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        place-items: center;
+        border-radius: 11px;
+        color: #173a45;
+        background: #a9ddd0;
+        font-size: 19px;
+        font-weight: 800;
+      }
+
+      .nav-label {
+        padding: 0 11px;
+        color: #8ca8ad;
+        font-size: 10px;
+        font-weight: 750;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .nav-list {
+        display: grid;
+        gap: 5px;
+        margin: 12px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 11px 12px;
+        border-radius: 9px;
+        color: #c3d4d7;
+        font-size: 13px;
+        text-decoration: none;
+      }
+
+      .nav-link.active {
+        color: #fff;
+        background: #28525b;
+        box-shadow: inset 3px 0 #8ed3c3;
+      }
+
+      .nav-icon {
+        width: 18px;
+        color: #9cb8bc;
+        text-align: center;
+      }
+
+      .sidebar-bottom {
+        margin-top: auto;
+      }
+
+      .help-card {
+        margin: 0 4px 20px;
+        padding: 16px;
+        border: 1px solid #41616a;
+        border-radius: 12px;
+        background: #204751;
+      }
+
+      .help-card strong {
+        display: block;
+        margin-bottom: 6px;
+        color: #fff;
+        font-size: 12px;
+      }
+
+      .help-card p {
+        margin: 0 0 12px;
+        color: #bdcdd0;
+        font-size: 11px;
+        line-height: 1.5;
+      }
+
+      .help-card a {
+        color: #a9ddd0;
+        font-size: 11px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .profile {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 16px 8px 0;
+        border-top: 1px solid #41616a;
+      }
+
+      .avatar {
+        display: grid;
+        flex: 0 0 auto;
+        width: 34px;
+        height: 34px;
+        place-items: center;
+        border-radius: 50%;
+        color: #173a45;
+        background: #e9c7a6;
+        font-size: 11px;
+        font-weight: 750;
+      }
+
+      .profile-name {
+        color: white;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .profile-type {
+        margin-top: 3px;
+        color: #a9bec1;
+        font-size: 10px;
+      }
+
+      main {
+        min-width: 0;
+      }
+
+      .topbar {
+        display: flex;
+        height: 68px;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 20px;
+        padding: 0 5.2%;
+        border-bottom: 1px solid var(--line);
+        background: #fff;
+      }
+
+      .secure-note {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        color: var(--muted);
+        font-size: 11px;
+      }
+
+      .secure-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #50a78a;
+      }
+
+      .topbar-date {
+        color: #71818b;
+        font-size: 11px;
+      }
+
+      .content {
+        width: min(1120px, 100%);
+        margin: 0 auto;
+        padding: 43px 5.2% 60px;
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        color: var(--teal);
+        font-size: 10px;
+        font-weight: 760;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .heading-row {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      h1 {
+        margin: 0;
+        color: var(--ink);
+        font-size: clamp(26px, 3vw, 34px);
+        font-weight: 680;
+        letter-spacing: -0.045em;
+      }
+
+      .intro {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .add-button {
+        padding: 10px 14px;
+        border: 1px solid #d5e5e2;
+        border-radius: 8px;
+        color: var(--teal-dark);
+        background: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .add-button:hover {
+        background: #f0f8f6;
+      }
+
+      .overview {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        margin-top: 29px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--surface);
+        box-shadow: 0 3px 12px rgb(27 55 65 / 3%);
+      }
+
+      .overview-item {
+        padding: 17px 22px;
+      }
+
+      .overview-item + .overview-item {
+        border-left: 1px solid var(--line);
+      }
+
+      .overview-label {
+        color: var(--muted);
+        font-size: 10px;
+      }
+
+      .overview-value {
+        margin-top: 7px;
+        color: var(--ink);
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+      }
+
+      .overview-meta {
+        margin-top: 4px;
+        color: #839098;
+        font-size: 10px;
+      }
+
+      .section-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin: 38px 0 16px;
+      }
+
+      .section-heading h2 {
+        margin: 0;
+        color: var(--ink);
+        font-size: 16px;
+        font-weight: 680;
+        letter-spacing: -0.025em;
+      }
+
+      .product-count {
+        margin-left: 8px;
+        color: #87949b;
+        font-size: 11px;
+        font-weight: 500;
+      }
+
+      .search {
+        width: min(230px, 40vw);
+        padding: 9px 12px 9px 34px;
+        border: 1px solid #e1e8e9;
+        border-radius: 8px;
+        outline: none;
+        color: var(--ink);
+        background:
+          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2374838e' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-4-4'/%3E%3C/svg%3E")
+            no-repeat 11px center,
+          #fff;
+        font-size: 11px;
+      }
+
+      .search:focus {
+        border-color: #85bdb3;
+        box-shadow: 0 0 0 3px rgb(19 126 120 / 9%);
+      }
+
+      .filters {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 17px;
+        overflow-x: auto;
+        padding-bottom: 3px;
+      }
+
+      .filter-button {
+        padding: 8px 13px;
+        border: 1px solid #e2e9ea;
+        border-radius: 7px;
+        color: #657780;
+        background: #fff;
+        font-size: 10px;
+        font-weight: 650;
+        white-space: nowrap;
+      }
+
+      .filter-button:hover {
+        border-color: #a9cfca;
+        color: var(--teal-dark);
+      }
+
+      .filter-button[aria-pressed="true"] {
+        border-color: #173a45;
+        color: white;
+        background: #173a45;
+      }
+
+      .product-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .product-card {
+        min-width: 0;
+        padding: 19px 20px 17px;
+        border: 1px solid var(--line);
+        border-radius: 11px;
+        background: var(--surface);
+        box-shadow: 0 3px 12px rgb(27 55 65 / 3%);
+        transition:
+          transform 160ms ease,
+          box-shadow 160ms ease;
+      }
+
+      .product-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 22px rgb(27 55 65 / 8%);
+      }
+
+      .card-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .product-identity {
+        display: flex;
+        min-width: 0;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .product-icon {
+        display: grid;
+        flex: 0 0 auto;
+        width: 42px;
+        height: 42px;
+        place-items: center;
+        border-radius: 12px;
+        font-size: 18px;
+      }
+
+      .icon-savings {
+        color: #267c71;
+        background: #e3f3ed;
+      }
+
+      .icon-card {
+        color: #556eb0;
+        background: #ebeffa;
+      }
+
+      .icon-loan {
+        color: #aa7740;
+        background: #f7efe2;
+      }
+
+      .icon-wealth {
+        color: #8b67a9;
+        background: #f2ecf7;
+      }
+
+      .product-name {
+        overflow: hidden;
+        margin: 0;
+        color: var(--ink);
+        font-size: 13px;
+        font-weight: 700;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .product-category {
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 10px;
+      }
+
+      .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 5px 8px;
+        border-radius: 99px;
+        font-size: 9px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .status::before {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: currentColor;
+        content: "";
+      }
+
+      .status-active {
+        color: #24765f;
+        background: #e9f5ef;
+      }
+
+      .status-pending {
+        color: #946a2b;
+        background: #fbf3e5;
+      }
+
+      .status-invested {
+        color: #75569a;
+        background: #f1ecf7;
+      }
+
+      .card-rule {
+        height: 1px;
+        margin: 17px 0 15px;
+        background: #edf0f1;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+      }
+
+      .metric-label {
+        color: #839098;
+        font-size: 9px;
+      }
+
+      .metric-value {
+        overflow: hidden;
+        margin-top: 5px;
+        color: #263d4b;
+        font-size: 13px;
+        font-weight: 690;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .card-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-top: 17px;
+      }
+
+      .account-ref {
+        color: #8a969d;
+        font-size: 9px;
+      }
+
+      .card-action {
+        padding: 8px 12px;
+        border: 1px solid #cfe2df;
+        border-radius: 7px;
+        color: var(--teal-dark);
+        background: #f7fbfa;
+        font-size: 10px;
+        font-weight: 700;
+      }
+
+      .card-action:hover {
+        border-color: var(--teal);
+        color: white;
+        background: var(--teal);
+      }
+
+      .empty-state {
+        display: none;
+        padding: 38px 20px;
+        border: 1px dashed #d5dfe0;
+        border-radius: 11px;
+        color: var(--muted);
+        background: #fff;
+        font-size: 12px;
+        text-align: center;
+      }
+
+      dialog {
+        width: min(420px, calc(100% - 32px));
+        padding: 0;
+        border: 0;
+        border-radius: 14px;
+        color: var(--ink);
+        box-shadow: 0 20px 70px rgb(12 34 44 / 25%);
+      }
+
+      dialog::backdrop {
+        background: rgb(17 39 48 / 48%);
+        backdrop-filter: blur(2px);
+      }
+
+      .dialog-content {
+        padding: 25px;
+      }
+
+      .dialog-close {
+        float: right;
+        padding: 4px 8px;
+        border: 0;
+        border-radius: 6px;
+        color: #61737a;
+        background: #f1f5f5;
+        font-size: 16px;
+      }
+
+      .dialog-content h2 {
+        margin: 3px 30px 8px 0;
+        font-size: 20px;
+        letter-spacing: -0.03em;
+      }
+
+      .dialog-content p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.6;
+      }
+
+      .dialog-note {
+        margin-top: 18px !important;
+        padding: 11px 12px;
+        border-radius: 8px;
+        color: #45646a !important;
+        background: #f1f7f6;
+      }
+
+      @media (max-width: 850px) {
+        .app {
+          grid-template-columns: 205px minmax(0, 1fr);
+        }
+
+        .content {
+          padding-right: 4%;
+          padding-left: 4%;
+        }
+
+        .product-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 620px) {
+        .app {
+          display: block;
+        }
+
+        .sidebar {
+          padding: 12px 15px;
+        }
+
+        .brand {
+          padding: 0 2px;
+        }
+
+        .sidebar > .nav-label,
+        .sidebar > .nav-list,
+        .sidebar-bottom {
+          display: none;
+        }
+
+        .topbar {
+          height: 48px;
+          justify-content: space-between;
+          padding: 0 18px;
+        }
+
+        .content {
+          padding: 27px 18px 40px;
+        }
+
+        .heading-row {
+          align-items: flex-start;
+        }
+
+        .add-button {
+          padding: 9px 10px;
+        }
+
+        .overview-item {
+          padding: 13px 10px;
+        }
+
+        .overview-value {
+          font-size: 16px;
+        }
+
+        .overview-meta {
+          font-size: 9px;
+        }
+
+        .section-heading {
+          align-items: flex-start;
+        }
+
+        .search {
+          width: 150px;
+        }
+
+        .product-card {
+          padding: 16px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar" aria-label="Main navigation">
+        <div class="brand"><span class="brand-mark" aria-hidden="true">n</span>northstar</div>
+        <div class="nav-label">Workspace</div>
+        <ul class="nav-list">
+          <li><a class="nav-link" href="#overview"><span class="nav-icon" aria-hidden="true">⌂</span>Overview</a></li>
+          <li><a class="nav-link active" href="#products" aria-current="page"><span class="nav-icon" aria-hidden="true">▦</span>Products</a></li>
+          <li><a class="nav-link" href="#activity"><span class="nav-icon" aria-hidden="true">↗</span>Activity</a></li>
+          <li><a class="nav-link" href="#payments"><span class="nav-icon" aria-hidden="true">⇄</span>Payments</a></li>
+        </ul>
+        <div class="sidebar-bottom">
+          <div class="help-card">
+            <strong>Here when you need us</strong>
+            <p>Questions about your products? Our team is ready to help.</p>
+            <a href="mailto:hello@northstar.example">Visit Help Centre ↗</a>
+          </div>
+          <div class="profile">
+            <div class="avatar" aria-hidden="true">JD</div>
+            <div>
+              <div class="profile-name">Jordan Davis</div>
+              <div class="profile-type">Personal account</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <main>
+        <header class="topbar">
+          <span class="secure-note"><span class="secure-dot" aria-hidden="true"></span>Secure banking</span>
+          <span class="topbar-date">Tuesday, 4 November 2026</span>
+        </header>
+
+        <div class="content" id="overview">
+          <p class="eyebrow">Your financial snapshot</p>
+          <div class="heading-row">
+            <div>
+              <h1>Banking products</h1>
+              <p class="intro">Everything you have with us, all in one place.</p>
+            </div>
+            <button class="add-button" id="explore-button" type="button">＋ Explore products</button>
+          </div>
+
+          <section class="overview" aria-label="Account summary">
+            <div class="overview-item">
+              <div class="overview-label">Total savings</div>
+              <div class="overview-value">$24,850.00</div>
+              <div class="overview-meta">Across 2 products</div>
+            </div>
+            <div class="overview-item">
+              <div class="overview-label">Available credit</div>
+              <div class="overview-value">$8,400.00</div>
+              <div class="overview-meta">Of $12,000 total limit</div>
+            </div>
+            <div class="overview-item">
+              <div class="overview-label">Active products</div>
+              <div class="overview-value" id="summary-count">4</div>
+              <div class="overview-meta">Across 4 categories</div>
+            </div>
+          </section>
+
+          <section id="products" aria-labelledby="products-heading">
+            <div class="section-heading">
+              <h2 id="products-heading">Your products <span class="product-count" id="product-count">4 products</span></h2>
+              <label>
+                <span class="visually-hidden" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Search products</span>
+                <input class="search" id="product-search" type="search" placeholder="Search products..." autocomplete="off" />
+              </label>
+            </div>
+
+            <div class="filters" role="group" aria-label="Filter products by category">
+              <button class="filter-button" type="button" data-category="All" aria-pressed="true">All products</button>
+              <button class="filter-button" type="button" data-category="Savings" aria-pressed="false">Savings</button>
+              <button class="filter-button" type="button" data-category="Cards" aria-pressed="false">Cards</button>
+              <button class="filter-button" type="button" data-category="Lending" aria-pressed="false">Lending</button>
+              <button class="filter-button" type="button" data-category="Wealth" aria-pressed="false">Wealth</button>
+            </div>
+
+            <div class="product-grid" id="product-grid" aria-live="polite"></div>
+            <div class="empty-state" id="empty-state">No products match your search. Try another name or category.</div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <dialog id="product-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-content">
+        <button class="dialog-close" id="dialog-close" type="button" aria-label="Close dialog">×</button>
+        <p class="eyebrow" id="dialog-eyebrow">Product details</p>
+        <h2 id="dialog-title"></h2>
+        <p id="dialog-description"></p>
+        <p class="dialog-note" id="dialog-note"></p>
+      </div>
+    </dialog>
+
+    <script>
+      // Product data is intentionally separate from the rendering and filter logic.
+      const products = [
+        {
+          id: "everyday-saver",
+          name: "Everyday Saver",
+          category: "Savings",
+          status: "Active",
+          icon: "↗",
+          iconClass: "icon-savings",
+          metrics: [
+            { label: "Current balance", value: "$18,250.00" },
+            { label: "Interest rate", value: "4.25% p.a." },
+          ],
+          reference: "•••• 4821",
+          action: "View details",
+          description: "Your flexible savings account. Add or withdraw funds whenever you need them, with interest calculated daily.",
+          note: "Interest rate: 4.25% p.a. · Account ending 4821",
+        },
+        {
+          id: "flexi-rewards",
+          name: "Flexi Rewards",
+          category: "Cards",
+          status: "Active",
+          icon: "▣",
+          iconClass: "icon-card",
+          metrics: [
+            { label: "Available credit", value: "$8,400.00" },
+            { label: "Next payment", value: "18 Nov 2026" },
+          ],
+          reference: "•••• 0936",
+          action: "View details",
+          description: "Your everyday rewards credit card. You have $8,400.00 available from your $12,000 limit.",
+          note: "Next payment due 18 Nov 2026 · Card ending 0936",
+        },
+        {
+          id: "home-personal-loan",
+          name: "Home Personal Loan",
+          category: "Lending",
+          status: "Active",
+          icon: "⌂",
+          iconClass: "icon-loan",
+          metrics: [
+            { label: "Remaining balance", value: "$12,600.00" },
+            { label: "Next due date", value: "24 Nov 2026" },
+          ],
+          reference: "Loan •••• 7704",
+          action: "View details",
+          description: "Your fixed-rate personal loan. Your next monthly repayment is scheduled for 24 November 2026.",
+          note: "Remaining balance: $12,600.00 · Loan ending 7704",
+        },
+        {
+          id: "managed-portfolio",
+          name: "Managed Portfolio",
+          category: "Wealth",
+          status: "Invested",
+          icon: "◌",
+          iconClass: "icon-wealth",
+          metrics: [
+            { label: "Portfolio value", value: "$6,600.00" },
+            { label: "Return this year", value: "+6.8%" },
+          ],
+          reference: "Investment account",
+          action: "View details",
+          description: "A diversified investment portfolio managed to match your long-term goals and risk preferences.",
+          note: "Portfolio value: $6,600.00 · Past performance does not guarantee future returns.",
+        },
+      ];
+
+      const grid = document.querySelector("#product-grid");
+      const searchInput = document.querySelector("#product-search");
+      const count = document.querySelector("#product-count");
+      const emptyState = document.querySelector("#empty-state");
+      const dialog = document.querySelector("#product-dialog");
+      let activeCategory = "All";
+
+      function renderProducts() {
+        const query = searchInput.value.trim().toLowerCase();
+        const visibleProducts = products.filter((product) => {
+          const matchesCategory = activeCategory === "All" || product.category === activeCategory;
+          const searchable = `${product.name} ${product.category} ${product.status} ${product.metrics.map((metric) => metric.value).join(" ")}`.toLowerCase();
+          return matchesCategory && searchable.includes(query);
+        });
+
+        count.textContent = `${visibleProducts.length} ${visibleProducts.length === 1 ? "product" : "products"}`;
+        grid.innerHTML = visibleProducts.map((product) => `
+          <article class="product-card" data-product-id="${product.id}">
+            <div class="card-top">
+              <div class="product-identity">
+                <div class="product-icon ${product.iconClass}" aria-hidden="true">${product.icon}</div>
+                <div>
+                  <h3 class="product-name">${product.name}</h3>
+                  <div class="product-category">${product.category}</div>
+                </div>
+              </div>
+              <span class="status status-${product.status.toLowerCase()}">${product.status}</span>
+            </div>
+            <div class="card-rule"></div>
+            <div class="metrics">
+              ${product.metrics.map((metric) => `
+                <div>
+                  <div class="metric-label">${metric.label}</div>
+                  <div class="metric-value">${metric.value}</div>
+                </div>
+              `).join("")}
+            </div>
+            <div class="card-bottom">
+              <span class="account-ref">${product.reference}</span>
+              <button class="card-action" type="button" data-action="${product.id}">${product.action} <span aria-hidden="true">→</span></button>
+            </div>
+          </article>
+        `).join("");
+        emptyState.style.display = visibleProducts.length ? "none" : "block";
+      }
+
+      document.querySelector(".filters").addEventListener("click", (event) => {
+        const button = event.target.closest("[data-category]");
+        if (!button) return;
+        activeCategory = button.dataset.category;
+        document.querySelectorAll(".filter-button").forEach((filter) => {
+          filter.setAttribute("aria-pressed", String(filter === button));
+        });
+        renderProducts();
+      });
+
+      searchInput.addEventListener("input", renderProducts);
+
+      grid.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-action]");
+        if (!button) return;
+        const product = products.find((item) => item.id === button.dataset.action);
+        if (!product) return;
+        document.querySelector("#dialog-eyebrow").textContent = `${product.category} · ${product.status}`;
+        document.querySelector("#dialog-title").textContent = product.name;
+        document.querySelector("#dialog-description").textContent = product.description;
+        document.querySelector("#dialog-note").textContent = product.note;
+        dialog.showModal();
+      });
+
+      document.querySelector("#dialog-close").addEventListener("click", () => dialog.close());
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) dialog.close();
+      });
+      document.querySelector("#explore-button").addEventListener("click", () => {
+        document.querySelector("#dialog-eyebrow").textContent = "Explore products";
+        document.querySelector("#dialog-title").textContent = "Find your next step";
+        document.querySelector("#dialog-description").textContent = "Explore savings, cards, lending, and wealth products with Northstar. A product specialist can help you find an option that fits your goals.";
+        document.querySelector("#dialog-note").textContent = "This demo screen does not submit applications or connect to a bank.";
+        dialog.showModal();
+      });
+
+      renderProducts();
+    </script>
+  </body>
+</html>
