@@ -700,12 +700,317 @@
           transition-duration: 0.01ms !important;
         }
       }
+
+      /* Morrow's visual direction: warm paper, ink, and a sharp citron accent. */
+      :root {
+        color: #24232b;
+        background: #f5f2ea;
+        --ink: #24232b;
+        --muted: #77747c;
+        --line: #e8e3d9;
+        --teal: #625e85;
+        --teal-dark: #4a466c;
+        --surface: #fffefa;
+      }
+
+      body {
+        background:
+          radial-gradient(ellipse at 82% 4%, rgb(231 221 201 / 32%), transparent 29rem),
+          #f5f2ea;
+      }
+
+      .sidebar {
+        background: #292733;
+      }
+
+      .brand-mark {
+        border-radius: 50%;
+        color: #292733;
+        background: #d7f477;
+      }
+
+      .nav-link.active {
+        color: #292733;
+        background: #d7f477;
+        box-shadow: none;
+      }
+
+      .nav-link.active .nav-icon {
+        color: #4c5433;
+      }
+
+      .help-card {
+        border-color: #4b4954;
+        background: #33313d;
+      }
+
+      .help-card a {
+        color: #d7f477;
+      }
+
+      .content {
+        padding-top: 50px;
+      }
+
+      h1,
+      .overview-value {
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 500;
+      }
+
+      h1 {
+        font-size: clamp(32px, 4vw, 46px);
+        letter-spacing: -0.055em;
+      }
+
+      .eyebrow {
+        color: #726d49;
+      }
+
+      .intro {
+        font-size: 13px;
+      }
+
+      .add-button {
+        border-color: #292733;
+        color: #292733;
+        background: #d7f477;
+      }
+
+      .add-button:hover {
+        background: #c8e86a;
+      }
+
+      .overview {
+        position: relative;
+        overflow: hidden;
+        border-color: #292733;
+        border-radius: 16px;
+        background: #292733;
+        box-shadow: 0 12px 30px rgb(41 39 51 / 12%);
+      }
+
+      .overview::after {
+        position: absolute;
+        top: -82px;
+        right: 12%;
+        width: 200px;
+        height: 200px;
+        border: 1px solid rgb(215 244 119 / 23%);
+        border-radius: 50%;
+        box-shadow:
+          0 0 0 22px rgb(215 244 119 / 5%),
+          0 0 0 48px rgb(215 244 119 / 4%);
+        content: "";
+        pointer-events: none;
+      }
+
+      .overview-item {
+        position: relative;
+        z-index: 1;
+        padding: 21px 24px;
+      }
+
+      .overview-item + .overview-item {
+        border-color: #484650;
+      }
+
+      .overview-label {
+        color: #c0bdc4;
+      }
+
+      .overview-value {
+        color: #fffefa;
+        font-size: 24px;
+      }
+
+      .overview-meta {
+        color: #aaa7b0;
+      }
+
+      .filter-button[aria-pressed="true"] {
+        border-color: #292733;
+        color: #292733;
+        background: #d7f477;
+      }
+
+      .product-card {
+        border-radius: 14px;
+        background: #fffefa;
+        box-shadow: 0 4px 14px rgb(45 40 33 / 4%);
+      }
+
+      .product-card:hover {
+        box-shadow: 0 10px 24px rgb(45 40 33 / 9%);
+      }
+
+      .product-icon {
+        border-radius: 50%;
+      }
+
+      .card-action {
+        border-color: #dcd8cc;
+        color: #4a466c;
+        background: #f6f4ee;
+      }
+
+      .card-action:hover {
+        border-color: #292733;
+        color: #292733;
+        background: #d7f477;
+      }
+
+      .support-section {
+        margin-top: 34px;
+      }
+
+      .support-section h2 {
+        margin: 0 0 13px;
+        font-size: 16px;
+      }
+
+      .support-grid {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 14px;
+      }
+
+      .support-panel {
+        padding: 18px 20px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fffefa;
+      }
+
+      .activity-row,
+      .payment-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 11px 0;
+        border-top: 1px solid #efede7;
+      }
+
+      .activity-row:first-of-type,
+      .payment-row:first-of-type {
+        border-top: 0;
+      }
+
+      .activity-name,
+      .payment-name {
+        color: #34313a;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .activity-meta,
+      .payment-meta {
+        margin-top: 4px;
+        color: #89858d;
+        font-size: 10px;
+      }
+
+      .activity-amount {
+        color: #34313a;
+        font-size: 11px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .payment-action {
+        padding: 7px 9px;
+        border: 1px solid #dedacc;
+        border-radius: 7px;
+        color: #4a466c;
+        background: #f6f4ee;
+        font-size: 9px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .payment-action:hover {
+        border-color: #292733;
+        color: #292733;
+        background: #d7f477;
+      }
+
+      .dialog-categories {
+        display: none;
+        gap: 7px;
+        margin-top: 16px;
+      }
+
+      .dialog-categories.visible {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .dialog-category {
+        padding: 8px 10px;
+        border: 1px solid #dedacc;
+        border-radius: 7px;
+        color: #4a466c;
+        background: #f6f4ee;
+        font-size: 10px;
+        font-weight: 700;
+      }
+
+      .dialog-category:hover {
+        border-color: #292733;
+        color: #292733;
+        background: #d7f477;
+      }
+
+      .dialog-note {
+        color: #514d68 !important;
+        background: #f1efe7;
+      }
+
+      .empty-state {
+        border-color: #d8d2c5;
+        border-radius: 14px;
+        background: #fffefa;
+      }
+
+      @media (max-width: 700px) {
+        .support-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 620px) {
+        .sidebar {
+          gap: 12px;
+        }
+
+        .sidebar > .nav-list {
+          display: flex;
+          gap: 5px;
+          margin: 0;
+          overflow-x: auto;
+        }
+
+        .nav-link {
+          padding: 8px 10px;
+          font-size: 11px;
+          white-space: nowrap;
+        }
+
+        .nav-icon {
+          width: auto;
+        }
+
+        .content {
+          padding-top: 28px;
+        }
+      }
     </style>
   </head>
   <body>
     <div class="app">
       <aside class="sidebar" aria-label="Main navigation">
-        <div class="brand"><span class="brand-mark" aria-hidden="true">n</span>northstar</div>
+        <div class="brand"><span class="brand-mark" aria-hidden="true">m</span>morrow</div>
         <div class="nav-label">Workspace</div>
         <ul class="nav-list">
           <li><a class="nav-link" href="#overview"><span class="nav-icon" aria-hidden="true">⌂</span>Overview</a></li>
@@ -717,7 +1022,7 @@
           <div class="help-card">
             <strong>Here when you need us</strong>
             <p>Questions about your products? Our team is ready to help.</p>
-            <a href="mailto:hello@northstar.example">Visit Help Centre ↗</a>
+            <a href="mailto:support@morrow.example?subject=Product%20support">Email support ↗</a>
           </div>
           <div class="profile">
             <div class="avatar" aria-hidden="true">JD</div>
@@ -732,7 +1037,7 @@
       <main>
         <header class="topbar">
           <span class="secure-note"><span class="secure-dot" aria-hidden="true"></span>Secure banking</span>
-          <span class="topbar-date">Tuesday, 4 November 2026</span>
+          <time class="topbar-date" id="today-date"></time>
         </header>
 
         <div class="content" id="overview">
@@ -749,7 +1054,7 @@
             <div class="overview-item">
               <div class="overview-label">Total savings</div>
               <div class="overview-value">$24,850.00</div>
-              <div class="overview-meta">Across 2 products</div>
+              <div class="overview-meta">Across 2 savings accounts</div>
             </div>
             <div class="overview-item">
               <div class="overview-label">Available credit</div>
@@ -758,7 +1063,7 @@
             </div>
             <div class="overview-item">
               <div class="overview-label">Active products</div>
-              <div class="overview-value" id="summary-count">4</div>
+              <div class="overview-value" id="summary-count">5</div>
               <div class="overview-meta">Across 4 categories</div>
             </div>
           </section>
@@ -783,6 +1088,35 @@
             <div class="product-grid" id="product-grid" aria-live="polite"></div>
             <div class="empty-state" id="empty-state">No products match your search. Try another name or category.</div>
           </section>
+
+          <div class="support-grid">
+            <section class="support-section support-panel" id="activity" aria-labelledby="activity-heading">
+              <h2 id="activity-heading">Recent activity</h2>
+              <div class="activity-row">
+                <div><div class="activity-name">Coffee &amp; Company</div><div class="activity-meta">Card • Today, 9:42 am</div></div>
+                <div class="activity-amount">−$6.80</div>
+              </div>
+              <div class="activity-row">
+                <div><div class="activity-name">Payday deposit</div><div class="activity-meta">Everyday Saver • 2 Nov</div></div>
+                <div class="activity-amount">+$2,450.00</div>
+              </div>
+              <div class="activity-row">
+                <div><div class="activity-name">Monthly subscription</div><div class="activity-meta">Card • 1 Nov</div></div>
+                <div class="activity-amount">−$14.99</div>
+              </div>
+            </section>
+            <section class="support-section support-panel" id="payments" aria-labelledby="payments-heading">
+              <h2 id="payments-heading">Coming up</h2>
+              <div class="payment-row">
+                <div><div class="payment-name">Card payment</div><div class="payment-meta">18 Nov · Flexi Rewards</div></div>
+                <button class="payment-action" type="button" data-payment="flexi-rewards">Review</button>
+              </div>
+              <div class="payment-row">
+                <div><div class="payment-name">Loan repayment</div><div class="payment-meta">24 Nov · Home Personal Loan</div></div>
+                <button class="payment-action" type="button" data-payment="home-personal-loan">Review</button>
+              </div>
+            </section>
+          </div>
         </div>
       </main>
     </div>
@@ -794,6 +1128,12 @@
         <h2 id="dialog-title"></h2>
         <p id="dialog-description"></p>
         <p class="dialog-note" id="dialog-note"></p>
+        <div class="dialog-categories" id="dialog-categories" aria-label="Explore a product category">
+          <button class="dialog-category" type="button" data-explore-category="Savings">Savings</button>
+          <button class="dialog-category" type="button" data-explore-category="Cards">Cards</button>
+          <button class="dialog-category" type="button" data-explore-category="Lending">Lending</button>
+          <button class="dialog-category" type="button" data-explore-category="Wealth">Wealth</button>
+        </div>
       </div>
     </dialog>
 
@@ -815,6 +1155,22 @@
           action: "View details",
           description: "Your flexible savings account. Add or withdraw funds whenever you need them, with interest calculated daily.",
           note: "Interest rate: 4.25% p.a. · Account ending 4821",
+        },
+        {
+          id: "rainy-day-fund",
+          name: "Rainy Day Fund",
+          category: "Savings",
+          status: "Active",
+          icon: "✳",
+          iconClass: "icon-savings",
+          metrics: [
+            { label: "Current balance", value: "$6,600.00" },
+            { label: "Interest rate", value: "3.80% p.a." },
+          ],
+          reference: "•••• 6159",
+          action: "View details",
+          description: "A separate savings pot for the unexpected. Your balance earns interest while staying available when you need it.",
+          note: "Interest rate: 3.80% p.a. · Account ending 6159",
         },
         {
           id: "flexi-rewards",
@@ -873,6 +1229,14 @@
       const dialog = document.querySelector("#product-dialog");
       let activeCategory = "All";
 
+      document.querySelector("#summary-count").textContent = products.length;
+      document.querySelector("#today-date").textContent = new Intl.DateTimeFormat(undefined, {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      }).format(new Date());
+
       function renderProducts() {
         const query = searchInput.value.trim().toLowerCase();
         const visibleProducts = products.filter((product) => {
@@ -924,16 +1288,27 @@
 
       searchInput.addEventListener("input", renderProducts);
 
-      grid.addEventListener("click", (event) => {
-        const button = event.target.closest("[data-action]");
-        if (!button) return;
-        const product = products.find((item) => item.id === button.dataset.action);
+      function showProductDialog(product) {
         if (!product) return;
+        document.querySelector("#dialog-categories").classList.remove("visible");
         document.querySelector("#dialog-eyebrow").textContent = `${product.category} · ${product.status}`;
         document.querySelector("#dialog-title").textContent = product.name;
         document.querySelector("#dialog-description").textContent = product.description;
         document.querySelector("#dialog-note").textContent = product.note;
         dialog.showModal();
+      }
+
+      grid.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-action]");
+        if (!button) return;
+        const product = products.find((item) => item.id === button.dataset.action);
+        showProductDialog(product);
+      });
+
+      document.querySelector("#payments").addEventListener("click", (event) => {
+        const button = event.target.closest("[data-payment]");
+        if (!button) return;
+        showProductDialog(products.find((item) => item.id === button.dataset.payment));
       });
 
       document.querySelector("#dialog-close").addEventListener("click", () => dialog.close());
@@ -941,11 +1316,36 @@
         if (event.target === dialog) dialog.close();
       });
       document.querySelector("#explore-button").addEventListener("click", () => {
+        document.querySelector("#dialog-categories").classList.add("visible");
         document.querySelector("#dialog-eyebrow").textContent = "Explore products";
         document.querySelector("#dialog-title").textContent = "Find your next step";
-        document.querySelector("#dialog-description").textContent = "Explore savings, cards, lending, and wealth products with Northstar. A product specialist can help you find an option that fits your goals.";
-        document.querySelector("#dialog-note").textContent = "This demo screen does not submit applications or connect to a bank.";
+        document.querySelector("#dialog-description").textContent = "Choose a category to see the products already available in this demo.";
+        document.querySelector("#dialog-note").textContent = "Product data is illustrative. This demo does not connect to a bank or submit applications.";
         dialog.showModal();
+      });
+
+      document.querySelector("#dialog-categories").addEventListener("click", (event) => {
+        const button = event.target.closest("[data-explore-category]");
+        if (!button) return;
+        activeCategory = button.dataset.exploreCategory;
+        document.querySelectorAll(".filter-button").forEach((filter) => {
+          filter.setAttribute("aria-pressed", String(filter.dataset.category === activeCategory));
+        });
+        searchInput.value = "";
+        renderProducts();
+        dialog.close();
+        document.querySelector("#products").scrollIntoView({ behavior: "smooth" });
+      });
+
+      document.querySelector(".nav-list").addEventListener("click", (event) => {
+        const link = event.target.closest(".nav-link");
+        if (!link) return;
+        document.querySelectorAll(".nav-link").forEach((item) => {
+          const isCurrent = item === link;
+          item.classList.toggle("active", isCurrent);
+          if (isCurrent) item.setAttribute("aria-current", "page");
+          else item.removeAttribute("aria-current");
+        });
       });
 
       renderProducts();
