@@ -7,7 +7,7 @@
       name="description"
       content="A unified view of your banking products, balances, and next steps."
     />
-    <title>Products | Morrow</title>
+    <title>Products | Vardha</title>
     <style>
       :root {
         color-scheme: light;
@@ -615,6 +615,69 @@
         background: #f1f7f6;
       }
 
+
+      .product-form {
+        display: grid;
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .form-field {
+        display: grid;
+        gap: 6px;
+      }
+
+      .form-field label {
+        color: #514d58;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .form-field input,
+      .form-field select,
+      .form-field textarea {
+        width: 100%;
+        padding: 10px 11px;
+        border: 1px solid #dedacc;
+        border-radius: 7px;
+        color: var(--ink);
+        background: #fffefa;
+        font: inherit;
+        font-size: 12px;
+      }
+
+      .form-field textarea {
+        min-height: 68px;
+        resize: vertical;
+      }
+
+      .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 9px;
+        margin-top: 5px;
+      }
+
+      .form-submit {
+        padding: 10px 14px;
+        border: 1px solid #292733;
+        border-radius: 7px;
+        color: #292733;
+        background: #d7f477;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .form-cancel {
+        padding: 10px 14px;
+        border: 1px solid #dedacc;
+        border-radius: 7px;
+        color: #514d58;
+        background: #fffefa;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
       @media (max-width: 850px) {
         .app {
           grid-template-columns: 205px minmax(0, 1fr);
@@ -701,7 +764,7 @@
         }
       }
 
-      /* Morrow's visual direction: warm paper, ink, and a sharp citron accent. */
+      /* Vardha's visual direction: warm paper, ink, and a sharp citron accent. */
       :root {
         color: #24232b;
         background: #f5f2ea;
@@ -935,33 +998,6 @@
         background: #d7f477;
       }
 
-      .dialog-categories {
-        display: none;
-        gap: 7px;
-        margin-top: 16px;
-      }
-
-      .dialog-categories.visible {
-        display: flex;
-        flex-wrap: wrap;
-      }
-
-      .dialog-category {
-        padding: 8px 10px;
-        border: 1px solid #dedacc;
-        border-radius: 7px;
-        color: #4a466c;
-        background: #f6f4ee;
-        font-size: 10px;
-        font-weight: 700;
-      }
-
-      .dialog-category:hover {
-        border-color: #292733;
-        color: #292733;
-        background: #d7f477;
-      }
-
       .dialog-note {
         color: #514d68 !important;
         background: #f1efe7;
@@ -1010,7 +1046,7 @@
   <body>
     <div class="app">
       <aside class="sidebar" aria-label="Main navigation">
-        <div class="brand"><span class="brand-mark" aria-hidden="true">m</span>Morrow</div>
+        <div class="brand"><span class="brand-mark" aria-hidden="true">m</span>Vardha</div>
         <div class="nav-label">Workspace</div>
         <ul class="nav-list">
           <li><a class="nav-link" href="#overview"><span class="nav-icon" aria-hidden="true">⌂</span>Overview</a></li>
@@ -1022,12 +1058,12 @@
           <div class="help-card">
             <strong>Here when you need us</strong>
             <p>Questions about your products? Our team is ready to help.</p>
-            <a href="mailto:support@morrow.example?subject=Product%20support">Email support ↗</a>
+            <a href="mailto:support@Vardha.example?subject=Product%20support">Email support ↗</a>
           </div>
           <div class="profile">
             <div class="avatar" aria-hidden="true">JD</div>
             <div>
-              <div class="profile-name">Jordan Davis</div>
+              <div class="profile-name">Sara David</div>
               <div class="profile-type">Personal account</div>
             </div>
           </div>
@@ -1047,7 +1083,7 @@
               <h1>Banking products</h1>
               <p class="intro">Everything you have with us, all in one place.</p>
             </div>
-            <button class="add-button" id="explore-button" type="button">＋ Explore products</button>
+            <button class="add-button" id="add-product-button" type="button">＋ Add product</button>
           </div>
 
           <section class="overview" aria-label="Account summary">
@@ -1128,12 +1164,49 @@
         <h2 id="dialog-title"></h2>
         <p id="dialog-description"></p>
         <p class="dialog-note" id="dialog-note"></p>
-        <div class="dialog-categories" id="dialog-categories" aria-label="Explore a product category">
-          <button class="dialog-category" type="button" data-explore-category="Savings">Savings</button>
-          <button class="dialog-category" type="button" data-explore-category="Cards">Cards</button>
-          <button class="dialog-category" type="button" data-explore-category="Lending">Lending</button>
-          <button class="dialog-category" type="button" data-explore-category="Wealth">Wealth</button>
-        </div>
+        <form class="product-form" id="add-product-form" hidden>
+          <div class="form-field">
+            <label for="new-product-name">Product name</label>
+            <input id="new-product-name" name="name" type="text" placeholder="e.g. Student Savings" required />
+          </div>
+          <div class="form-field">
+            <label for="new-product-category">Category</label>
+            <select id="new-product-category" name="category" required>
+              <option value="Savings">Savings</option>
+              <option value="Cards">Cards</option>
+              <option value="Lending">Lending</option>
+              <option value="Wealth">Wealth</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="new-product-status">Status</label>
+            <select id="new-product-status" name="status">
+              <option>Active</option>
+              <option>Pending</option>
+              <option>Invested</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="new-product-metric-label">First detail label</label>
+            <input id="new-product-metric-label" name="metricLabel" type="text" placeholder="e.g. Current balance" required />
+          </div>
+          <div class="form-field">
+            <label for="new-product-metric-value">First detail value</label>
+            <input id="new-product-metric-value" name="metricValue" type="text" placeholder="e.g. $2,500.00" required />
+          </div>
+          <div class="form-field">
+            <label for="new-product-reference">Reference</label>
+            <input id="new-product-reference" name="reference" type="text" placeholder="e.g. Account ending 1234" />
+          </div>
+          <div class="form-field">
+            <label for="new-product-description">Description</label>
+            <textarea id="new-product-description" name="description" placeholder="Describe this product"></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="form-cancel" id="cancel-add-product" type="button">Cancel</button>
+            <button class="form-submit" type="submit">Add product</button>
+          </div>
+        </form>
       </div>
     </dialog>
 
@@ -1238,6 +1311,7 @@
       }).format(new Date());
 
       function renderProducts() {
+        document.querySelector("#summary-count").textContent = products.length;
         const query = searchInput.value.trim().toLowerCase();
         const visibleProducts = products.filter((product) => {
           const matchesCategory = activeCategory === "All" || product.category === activeCategory;
@@ -1290,6 +1364,7 @@
 
       function showProductDialog(product) {
         if (!product) return;
+        addProductForm.hidden = true;
         document.querySelector("#dialog-categories").classList.remove("visible");
         document.querySelector("#dialog-eyebrow").textContent = `${product.category} · ${product.status}`;
         document.querySelector("#dialog-title").textContent = product.name;
@@ -1315,23 +1390,64 @@
       dialog.addEventListener("click", (event) => {
         if (event.target === dialog) dialog.close();
       });
-      document.querySelector("#explore-button").addEventListener("click", () => {
-        document.querySelector("#dialog-categories").classList.add("visible");
-        document.querySelector("#dialog-eyebrow").textContent = "Explore products";
-        document.querySelector("#dialog-title").textContent = "Find your next step";
-        document.querySelector("#dialog-description").textContent = "Choose a category to see the products already available in this demo.";
-        document.querySelector("#dialog-note").textContent = "Product data is illustrative. This demo does not connect to a bank or submit applications.";
+      const addProductButton = document.querySelector("#add-product-button");
+      const addProductForm = document.querySelector("#add-product-form");
+
+      addProductButton.addEventListener("click", () => {
+        addProductForm.hidden = false;
+        document.querySelector("#dialog-eyebrow").textContent = "New product";
+        document.querySelector("#dialog-title").textContent = "Add a product";
+        document.querySelector("#dialog-description").textContent = "Enter the product information below. It will be added to this dashboard.";
+        document.querySelector("#dialog-note").textContent = "This is a front-end demo. New products are added only while this page remains open.";
         dialog.showModal();
       });
 
-      document.querySelector("#dialog-categories").addEventListener("click", (event) => {
-        const button = event.target.closest("[data-explore-category]");
-        if (!button) return;
-        activeCategory = button.dataset.exploreCategory;
-        document.querySelectorAll(".filter-button").forEach((filter) => {
-          filter.setAttribute("aria-pressed", String(filter.dataset.category === activeCategory));
+      document.querySelector("#cancel-add-product").addEventListener("click", () => {
+        addProductForm.reset();
+        addProductForm.hidden = true;
+        dialog.close();
+      });
+
+      addProductForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(addProductForm);
+        const name = formData.get("name").trim();
+        const category = formData.get("category");
+        const status = formData.get("status");
+        const metricLabel = formData.get("metricLabel").trim();
+        const metricValue = formData.get("metricValue").trim();
+        const reference = formData.get("reference").trim() || "New product";
+        const description = formData.get("description").trim() || `${name} product details.`;
+
+        const iconClasses = {
+          Savings: ["↗", "icon-savings"],
+          Cards: ["▣", "icon-card"],
+          Lending: ["⌂", "icon-loan"],
+          Wealth: ["◌", "icon-wealth"]
+        };
+        const [icon, iconClass] = iconClasses[category];
+
+        products.push({
+          id: `product-${Date.now()}`,
+          name,
+          category,
+          status,
+          icon,
+          iconClass,
+          metrics: [{ label: metricLabel, value: metricValue }],
+          reference,
+          action: "View details",
+          description,
+          note: `${category} · ${status}`
         });
+
+        addProductForm.reset();
+        addProductForm.hidden = true;
+        activeCategory = "All";
         searchInput.value = "";
+        document.querySelectorAll(".filter-button").forEach((filter) => {
+          filter.setAttribute("aria-pressed", String(filter.dataset.category === "All"));
+        });
         renderProducts();
         dialog.close();
         document.querySelector("#products").scrollIntoView({ behavior: "smooth" });
